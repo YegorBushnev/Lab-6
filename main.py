@@ -16,8 +16,23 @@ def encode(password):
     encode_string = ''.join(encoded_list)
     return encode_string
 
+def decode(password):
+    decode_string = ''
+    for i in password:
+        if i == '0' or i == '1' or i == '2':
+            special_case = {
+                '0':'7', '1':'8', '2':'9'
+            }
+            decode_string += special_case[i]
+        else:
+            decode_string += str(int(i) - 3)
+
+
+    return decode_string
+
 def main():
     Program = True
+    encoded_password = ''
     while Program == True:
         print("""Menu 
     -------------
@@ -34,6 +49,9 @@ def main():
             print()
 
         elif menu_choice == 2:
+
+            decoded_password = decode(encoded_password)
+            print(f"The encoded password is {encoded_password}, and the original password is {decoded_password}.")
             pass
 
         elif menu_choice == 3:
