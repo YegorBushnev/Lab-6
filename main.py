@@ -24,16 +24,36 @@ def encode(password):
     encode_string = ''.join(encoded_list)
     return encode_string
 
+def decode(password):
+    """This function takes in the user's encoded password in string format containing only integers. Then
+    a for loop goes through each character, changes it with the corresponding value in the library or subtracts 3,
+    and adds it to a new string."""
+
+    decode_string = ''
+    for i in password:
+        if i == '0' or i == '1' or i == '2':
+            special_case = {
+                '0':'7', '1':'8', '2':'9'
+            }
+            decode_string += special_case[i]
+        else:
+            decode_string += str(int(i) - 3)
+
+    return decode_string
+
+
 def main():
     """This is the function for the main program."""
     Program = True
+    encoded_password = ''
     #Create a while loop for the menu.
     while Program == True:
         print("""Menu 
-    -------------
-    1. Encode
-    2. Decode
-    3. Quit""")
+-------------
+1. Encode
+2. Decode
+3. Quit""")
+        print()
         print()
         #Allow user to input a menu choice
         menu_choice = int(input("Please enter an option: "))
@@ -44,11 +64,15 @@ def main():
             encoded_password = encode(password)
             print("Your password has been encoded and stored!")
             print()
+            print()
 
         #Decodes the encoded password of the user using the decode function
         #Returns the original password
         elif menu_choice == 2:
-            pass
+            decoded_password = decode(encoded_password)
+            print(f"The encoded password is {encoded_password}, and the original password is {decoded_password}.")
+            print()
+            print()
 
         #Quits the program
         elif menu_choice == 3:
